@@ -5,8 +5,9 @@ const express = require("express");
 const ParseServer = require('parse-server').ParseServer;
 const path = require('path');
 
-const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/dental-perfect';   // Mongodb
+// const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/dental-perfect';   // Mongodb
 // const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://192.168.1.166:27017/admin';   // Mongodb
+const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://admin:admin113692@ds113692.mlab.com:13692/dental-perfect';   // Mongodb
 
 const appId = process.env.APP_ID || 'dental-perfect';
 const appName = process.env.APP_NAME || 'Dental-Perfect';      // 本应用名称
@@ -157,34 +158,34 @@ app.post('/WxPayNotify', function (req, res) {
   });
 });
 
-//WebSocket Server
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 1339 });
-console.log('bee websocket-server running on ws://localhost:1339');
-
-wss.on('connection', function connection(ws, req) {
-  ws.on('message', function incoming(data) {
-    // Broadcast to everyone else.
-    wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
-    });
-  });
-  if (req.url && req.url === '/notice') {
-    wss.clients.forEach(function each(client) {
-      // client.send(data);
-      let data = { count: 0};
-      setInterval(() => {
-        var now = new Date();
-        data = { count: data.count + 1, sendDatetime: now.toLocaleTimeString()};
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(data));
-        }
-      }, 6000);
-    });
-  }
-});
+// //WebSocket Server
+// const WebSocket = require('ws');
+// const wss = new WebSocket.Server({ port: 1339 });
+// console.log('bee websocket-server running on ws://localhost:1339');
+//
+// wss.on('connection', function connection(ws, req) {
+//   ws.on('message', function incoming(data) {
+//     // Broadcast to everyone else.
+//     wss.clients.forEach(function each(client) {
+//       if (client !== ws && client.readyState === WebSocket.OPEN) {
+//         client.send(data);
+//       }
+//     });
+//   });
+//   if (req.url && req.url === '/notice') {
+//     wss.clients.forEach(function each(client) {
+//       // client.send(data);
+//       let data = { count: 0};
+//       setInterval(() => {
+//         var now = new Date();
+//         data = { count: data.count + 1, sendDatetime: now.toLocaleTimeString()};
+//         if (client.readyState === WebSocket.OPEN) {
+//           client.send(JSON.stringify(data));
+//         }
+//       }, 6000);
+//     });
+//   }
+// });
 
 
 // There will be a test page available on the /test path of your server url
