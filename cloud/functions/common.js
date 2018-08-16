@@ -74,7 +74,7 @@ Parse.Cloud.define('Query', function (request, response) {
   const { user } = request;
   const sessionToken = user.getSessionToken();
 
-  const { params, params: { related } } = request;
+  const { params, params: { related, where, order } } = request;
 
   const className = params.classname;
   delete params.classname;
@@ -83,10 +83,37 @@ Parse.Cloud.define('Query', function (request, response) {
 
   const theClass = Parse.Object.extend(className);
   const theQuery = new Parse.Query(theClass);
-  theQuery.descending("createdAt");
+  if (where) {
+    const objWhere = JSON.parse(where);
+    if (Array.isArray(objWhere)) {
+      objWhere.forEach(item => {
+        for (let i in item) {
+          theQuery.equalTo(i, item[i]);
+        }
+      });
+    } else {
+      for (let i in objWhere) {
+        theQuery.equalTo(i, objWhere[i]);
+      }
+    }
+  }
+  if (order) {
+    const orders = order.split(',');
+    orders.forEach(item => {
+      if (item.indexOf('-') < 0) {
+        theQuery.ascending(item);
+      } else {
+        theQuery.descending(item.substring(1));
+      }
+    });
+  }
 
   const relateds = related ? related.split(',') : [];
   theQuery.find({ sessionToken }).then((theObjects) => {
+    if (theObjects.length <=0) {
+      response.success(data);
+      return;
+    }
     const _after = _.after(theObjects.length, () => {
       response.success(data);
     });
