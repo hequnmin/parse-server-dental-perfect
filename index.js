@@ -7,13 +7,14 @@ const path = require('path');
 
 // const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/dental-perfect';   // Mongodb
 // const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://192.168.1.166:27017/admin';   // Mongodb
+// const serverURL = process.env.SERVER_URL || 'http://localhost:1338/dental-perfect';   // Don't forget to change to https if needed
+
 const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://admin:admin113692@ds113692.mlab.com:13692/dental-perfect';   // Mongodb
+const serverURL = process.env.SERVER_URL || 'https://parse-server-dental-perfect.herokuapp.com/dental-perfect';   // Don't forget to change to https if needed
 
 const appId = process.env.APP_ID || 'dental-perfect';
 const appName = process.env.APP_NAME || 'Dental-Perfect';      // 本应用名称
 const masterKey = process.env.MASTER_KEY || 'Dental-Perfect-2018';      // 主密匙. 保密!
-// const serverURL = process.env.SERVER_URL || 'http://localhost:1338/parse';   // Don't forget to change to https if needed
-const serverURL = process.env.SERVER_URL || 'http://localhost:1338/dental-perfect';   // Don't forget to change to https if needed
 const cloud = process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/index.js';
 const verifyUserEmails = true;                            // 是否开启邮件验证
 const publicServerURL = serverURL;                        // 验证邮件链接URL
