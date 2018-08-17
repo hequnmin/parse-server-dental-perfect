@@ -83,6 +83,132 @@ curl -X POST \
 	"password": "e10adc3949ba59abbe56e057f20f883e"
 }'
 ```
+#### Query 对象类查询
+接口实例：
+````curl
+curl -X POST \
+  'http://localhost:1338/dental-perfect/functions/Query?classname=Menu&where={"level":1}&related=children' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: d6076b9e-5f16-4f44-a566-c32b0207f1e0' \
+  -H 'X-Parse-Application-Id: dental-perfect' \
+  -H 'X-Parse-Session-Token: r:a9c73fa77cfa0870528f7a7d81c0bc1d'
+````
+
+```json
+{
+    "result": [
+        {
+            "name": "控制面板",
+            "path": "dashboard",
+            "icon": "dashboard",
+            "hideInMenu": false,
+            "sort": 1,
+            "level": 1,
+            "children": [
+                {
+                    "path": "monitor",
+                    "name": "监控预警",
+                    "hideInMenu": false,
+                    "sort": 4,
+                    "level": 2,
+                    "objectId": "0Yiu5KmsyH"
+                },
+                {
+                    "name": "工作台",
+                    "path": "workspace",
+                    "sort": 2,
+                    "hideInMenu": false,
+                    "level": 2,
+                    "objectId": "7iqRwiq3pP"
+                },
+                {
+                    "path": "analysis",
+                    "name": "分析统计",
+                    "hideInMenu": false,
+                    "sort": 3,
+                    "level": 2,
+                    "objectId": "LhSW7eWhjT"
+                }
+            ],
+            "objectId": "rTALyOMs7W"
+        },
+        {
+            "name": "系统管理",
+            "createdAt": "2018-08-16T16:14:04.488Z",
+            "updatedAt": "2018-08-16T16:21:14.318Z",
+            "icon": "setting",
+            "path": "system",
+            "hideInMenu": false,
+            "sort": 8,
+            "level": 1,
+            "children": [
+                {
+                    "path": "user",
+                    "name": "用户管理",
+                    "icon": "user",
+                    "hideInMenu": false,
+                    "sort": 10,
+                    "level": 2,
+                    "objectId": "JCdlwZbbgD"
+                },
+                {
+                    "name": "管理面板",
+                    "icon": "tool",
+                    "path": "admin",
+                    "hideInMenu": false,
+                    "sort": 9,
+                    "level": 2,
+                    "objectId": "cVSGI6DgdV"
+                },
+                {
+                    "name": "菜单管理",
+                    "icon": "bars",
+                    "path": "menu",
+                    "hideInMenu": false,
+                    "sort": 11,
+                    "level": 2,
+                    "objectId": "iCuzWNi5JW"
+                }
+            ],
+            "objectId": "ImZ1AUHgyH"
+        },
+        {
+            "name": "个人中心",
+            "icon": "user",
+            "path": "personal",
+            "hideInMenu": false,
+            "sort": 5,
+            "level": 1,
+            "children": [
+                {
+                    "name": "消息中心",
+                    "path": "notices",
+                    "hideInMenu": false,
+                    "sort": 7,
+                    "level": 2,
+                    "objectId": "ZvQW4M7VRq"
+                },
+                {
+                    "name": "个人设置",
+                    "path": "setting",
+                    "hideInMenu": false,
+                    "sort": 6,
+                    "level": 2,
+                    "objectId": "zwt8ekHjLz"
+                }
+            ],
+            "objectId": "qe2tp4hODd"
+        }
+    ]
+}
+```
+
+查询参数：
+* classname - 对象类名，如：_Role、Menu
+* related - 关联字段，支持relation字段关联查询。
+* where - 过滤条件
+* sort - 排序字段
 
 #### Order
 
@@ -326,4 +452,3 @@ curl -F "name=file" -F "filepath=@file.tar.gz" http://localhost:1338/parse/uploa
 
 
 
- 

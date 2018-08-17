@@ -25,6 +25,20 @@ Parse.Cloud.define('Query', function (request, response) {
 
   const theClass = Parse.Object.extend(className);
   const theQuery = new Parse.Query(theClass);
+
+  // 排序参数
+  const orders = order === undefined ? [] : order.split(',');
+  if (orders.length > 0) {
+    orders.forEach(item => {
+      if (item.indexOf('-') < 0) {
+        theQuery.ascending(item);
+      } else {
+        theQuery.descending(item.substring(1));
+      }
+    });
+  }
+
+  // 条件参数
   if (where) {
     const objWhere = JSON.parse(where);
     if (Array.isArray(objWhere)) {
@@ -39,17 +53,8 @@ Parse.Cloud.define('Query', function (request, response) {
       }
     }
   }
-  if (order) {
-    const orders = order.split(',');
-    orders.forEach(item => {
-      if (item.indexOf('-') < 0) {
-        theQuery.ascending(item);
-      } else {
-        theQuery.descending(item.substring(1));
-      }
-    });
-  }
 
+  // 关联参数
   const relateds = related ? related.split(',') : [];
   theQuery.find({ sessionToken }).then((theObjects) => {
     if (theObjects.length <=0) {
@@ -57,6 +62,15 @@ Parse.Cloud.define('Query', function (request, response) {
       return;
     }
     const _after = _.after(theObjects.length, () => {
+      if (orders.length > 0) {
+        orders.forEach(item => {
+          if (item.indexOf('-') < 0) {
+            data.sort((a, b) => a[item] - b[item]);
+          } else {
+            data.sort((a, b) => b[item] - a[item]);
+          }
+        });
+      }
       response.success(data);
     });
     _.each(theObjects, async (theObject) => {
