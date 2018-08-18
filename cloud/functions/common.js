@@ -36,6 +36,8 @@ Parse.Cloud.define('Query', function (request, response) {
         theQuery.descending(item.substring(1));
       }
     });
+  } else {
+    theQuery.ascending('createAt');
   }
 
   // 条件参数
@@ -83,7 +85,11 @@ Parse.Cloud.define('Query', function (request, response) {
           const relationName = relateds[index];
           const theRelations = theObject.relation(relationName);
 
-          const findRelations = await theRelations.query().find({sessionToken});
+          const theRelationsQuery = theRelations.query();
+
+          theRelationsQuery.ascending('createAt');
+
+          const findRelations = await theRelationsQuery.find({sessionToken});
 
           findRelations.map((r) => { r.toJSON()});
           theJson[relationName] = findRelations;
