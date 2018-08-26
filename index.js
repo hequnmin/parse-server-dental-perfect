@@ -6,6 +6,7 @@ const ParseServer = require('parse-server').ParseServer;
 const path = require('path');
 
 const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/dental-perfect';   // Mongodb
+// const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'postgres://postgres:123456@localhost:5432/dental-perfect';   // Postgres
 const serverURL = process.env.SERVER_URL || 'http://localhost:1338/dental-perfect';   // Don't forget to change to https if needed
 
 // const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://192.168.1.166:27017/admin';   // Mongodb

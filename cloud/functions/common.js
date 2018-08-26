@@ -37,7 +37,7 @@ Parse.Cloud.define('Query', function (request, response) {
       }
     });
   } else {
-    theQuery.ascending('createAt');
+    theQuery.ascending('createdAt');
   }
 
   // 条件参数
@@ -87,7 +87,7 @@ Parse.Cloud.define('Query', function (request, response) {
 
           const theRelationsQuery = theRelations.query();
 
-          theRelationsQuery.ascending('createAt');
+          theRelationsQuery.ascending('createdAt');
 
           const findRelations = await theRelationsQuery.find({sessionToken});
 
