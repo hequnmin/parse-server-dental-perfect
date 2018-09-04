@@ -7,11 +7,12 @@ const path = require('path');
 
 const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/dental-perfect';   // Mongodb
 // const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'postgres://postgres:123456@localhost:5432/dental-perfect';   // Postgres
+// const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'postgres://aznslwpzuhnmqj:7a2d6f68b0e1f93668d7dd08d92b20b52604cd412433ea406e7b87ef67bfeca4@ec2-54-225-92-1.compute-1.amazonaws.com:5432/d2i0j6coa9nf2o';   // Postgres
 const serverURL = process.env.SERVER_URL || 'http://localhost:1338/dental-perfect';   // Don't forget to change to https if needed
-
+// MONGODB_URI = mongodb://admin:admin113692@ds113692.mlab.com:13692/dental-perfect
 // const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://192.168.1.166:27017/admin';   // Mongodb
 
-// const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://admin:admin113692@ds113692.mlab.com:13692/dental-perfect';   // Mongodb
+// const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI || 'mongodb://admin:admin123456@ds113692.mlab.com:13692/dental-perfect';   // Mongodb
 // const serverURL = process.env.SERVER_URL || 'https://parse-server-dental-perfect.herokuapp.com/dental-perfect';   // Don't forget to change to https if needed
 
 const appId = process.env.APP_ID || 'dental-perfect';
